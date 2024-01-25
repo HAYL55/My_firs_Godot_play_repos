@@ -1,0 +1,77 @@
+[gd_scene load_steps=10 format=3 uid="uid://bp7drjqvd1e3e"]
+
+[ext_resource type="Texture2D" uid="uid://2o2ug3m5rm85" path="res://sprites/MainArea.png" id="1_168lg"]
+[ext_resource type="Texture2D" uid="uid://0jjx80hwf240" path="res://sprites/MainBackArea1.png" id="1_wmfk3"]
+[ext_resource type="PackedScene" uid="uid://b7ud16gpeg2be" path="res://scenes/simpl_collision_shape_2d.tscn" id="2_xf5y4"]
+[ext_resource type="PackedScene" uid="uid://fah6akbt8xor" path="res://scenes/main_caracter.tscn" id="3_3sslb"]
+[ext_resource type="PackedScene" uid="uid://ctcfyigdpvfjl" path="res://scenes/security_body_2d.tscn" id="5_fv3qp"]
+[ext_resource type="PackedScene" uid="uid://c07wapsc1oo86" path="res://scenes/vertical_simpl_colision_shape_2d.tscn" id="6_5iauc"]
+[ext_resource type="Texture2D" uid="uid://dsebo0vwgqifm" path="res://sprites/MainBackDownArea.png" id="7_odupl"]
+[ext_resource type="Texture2D" uid="uid://dlr08el7h46cb" path="res://sprites/MainBackUpArea.png" id="8_vpoe5"]
+[ext_resource type="Texture2D" uid="uid://cnijx5aidkr11" path="res://sprites/shop1.png" id="9_85ayw"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="MainBackArea1" type="Sprite2D" parent="."]
+position = Vector2(469, 34)
+scale = Vector2(1.044, 1.33)
+texture = ExtResource("1_wmfk3")
+
+[node name="MainBackArea1" type="Sprite2D" parent="MainBackArea1"]
+position = Vector2(487.548, -20.3008)
+scale = Vector2(1.044, 0.861739)
+texture = ExtResource("1_wmfk3")
+
+[node name="MainArea" type="Sprite2D" parent="."]
+position = Vector2(505, 29)
+texture = ExtResource("1_168lg")
+
+[node name="MainCaracter" parent="." instance=ExtResource("3_3sslb")]
+position = Vector2(62, 35)
+scale = Vector2(0.45, 0.45)
+
+[node name="StaticBody2D" parent="." instance=ExtResource("2_xf5y4")]
+position = Vector2(13, 68)
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("5_fv3qp")]
+position = Vector2(179, 33)
+
+[node name="StaticBody2D2" parent="." instance=ExtResource("6_5iauc")]
+position = Vector2(13, -94)
+
+[node name="MainBackDownArea" type="Sprite2D" parent="."]
+show_behind_parent = true
+position = Vector2(484, 167)
+texture = ExtResource("7_odupl")
+
+[node name="MainBackUpArea" type="Sprite2D" parent="."]
+show_behind_parent = true
+position = Vector2(-67, -130)
+texture = ExtResource("8_vpoe5")
+
+[node name="MainBackUpArea2" type="Sprite2D" parent="."]
+show_behind_parent = true
+position = Vector2(933, -149)
+texture = ExtResource("8_vpoe5")
+
+[node name="security" parent="." instance=ExtResource("5_fv3qp")]
+position = Vector2(296, 31)
+
+[node name="security2" parent="." instance=ExtResource("5_fv3qp")]
+position = Vector2(418, 28)
+
+[node name="MainBackDownArea2" type="Sprite2D" parent="."]
+position = Vector2(-553, 134)
+texture = ExtResource("7_odupl")
+
+[node name="MainBackDownArea3" type="Sprite2D" parent="."]
+position = Vector2(-9, 240)
+texture = ExtResource("7_odupl")
+
+[node name="Shop1" type="Sprite2D" parent="."]
+position = Vector2(-65, 101)
+texture = ExtResource("9_85ayw")
+
+[node name="MainBackUpArea3" type="Sprite2D" parent="."]
+position = Vector2(-553, -66)
+texture = ExtResource("8_vpoe5")

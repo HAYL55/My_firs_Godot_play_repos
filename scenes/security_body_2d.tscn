@@ -1,0 +1,129 @@
+[gd_scene load_steps=17 format=3 uid="uid://ctcfyigdpvfjl"]
+
+[ext_resource type="Script" path="res://scenes/security_body_2d.gd" id="1_3sv26"]
+[ext_resource type="Texture2D" uid="uid://csjvhts7y6q6k" path="res://sprites/pixil-frame-22.png" id="1_7312t"]
+[ext_resource type="Texture2D" uid="uid://brkcw8jcyuyme" path="res://sprites/SecurityFall1.png" id="2_2iosu"]
+[ext_resource type="Texture2D" uid="uid://bl805hwiuukig" path="res://sprites/SecurityIsBeingDamaded1.png" id="2_tbfed"]
+[ext_resource type="Texture2D" uid="uid://b6n0jeks77rfv" path="res://sprites/SecurityFall2.png" id="3_1s8io"]
+[ext_resource type="Texture2D" uid="uid://5lpt3d234lcm" path="res://sprites/secyritygoing.png" id="3_clehi"]
+[ext_resource type="Texture2D" uid="uid://b1k4q0rvtj6xd" path="res://sprites/SecurityFall3.png" id="4_hyofd"]
+[ext_resource type="Texture2D" uid="uid://5akpvvsh3mfg" path="res://sprites/SecurityFall4.png" id="5_wvsef"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oeki5"]
+atlas = ExtResource("1_7312t")
+region = Rect2(0, 0, 34, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ltkmc"]
+atlas = ExtResource("1_7312t")
+region = Rect2(34, 0, 34, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ytgi"]
+atlas = ExtResource("3_clehi")
+region = Rect2(0, 0, 46, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n8bj0"]
+atlas = ExtResource("3_clehi")
+region = Rect2(46, 0, 46, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mmtrc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_tbfed")
+}],
+"loop": false,
+"name": &"IsBeingDamaged",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_tbfed")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_2iosu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_1s8io")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_hyofd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_wvsef")
+}],
+"loop": false,
+"name": &"fall",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oeki5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ltkmc")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ytgi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n8bj0")
+}],
+"loop": true,
+"name": &"run1",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_we2bg"]
+radius = 45.0111
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2fahe"]
+size = Vector2(15, 39)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fvoxs"]
+size = Vector2(15, 39)
+
+[node name="security" type="CharacterBody2D"]
+script = ExtResource("1_3sv26")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-0.875, 1.51471)
+scale = Vector2(0.522059, 0.522059)
+sprite_frames = SubResource("SpriteFrames_mmtrc")
+animation = &"fall"
+
+[node name="Detector" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detector"]
+shape = SubResource("CircleShape2D_we2bg")
+
+[node name="SecurityDamaged" type="CollisionShape2D" parent="."]
+position = Vector2(-1.5, 8.5)
+shape = SubResource("RectangleShape2D_2fahe")
+
+[node name="wouldBeDamaged" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wouldBeDamaged"]
+position = Vector2(-1.5, 8.5)
+shape = SubResource("RectangleShape2D_fvoxs")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -13.0
+offset_top = -22.0
+offset_right = 53.0
+offset_bottom = 4.0
+theme_override_font_sizes/font_size = 8
+text = "hp : 606"
+
+[node name="TimerCanGottinDamage" type="Timer" parent="."]
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="area_entered" from="Detector" to="." method="_on_detector_area_entered"]
+[connection signal="body_entered" from="Detector" to="." method="_on_detector_body_entered"]
+[connection signal="body_exited" from="Detector" to="." method="_on_detector_body_exited"]
+[connection signal="area_entered" from="wouldBeDamaged" to="." method="_on_would_be_damaged_area_entered"]
+[connection signal="timeout" from="TimerCanGottinDamage" to="." method="_on_timer_can_gottin_damage_timeout"]

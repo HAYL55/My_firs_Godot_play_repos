@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8x8io7gjkvkm"]
+
+[ext_resource type="Script" path="res://MainCaracterDamagArea.gd" id="1_x1nc0"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1xq85"]
+radius = 10.3357
+height = 72.4347
+
+[node name="MainCaracterDamagArea" type="Area2D"]
+script = ExtResource("1_x1nc0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+rotation = 1.43972
+shape = SubResource("CapsuleShape2D_1xq85")
